@@ -13,7 +13,9 @@ function SetCustomItems({ setPersonsPerPage }) {
       <Form.Label>Select Items</Form.Label>
       <Form.Control as="select" onChange={handleChange}>
         {numbers.map((number) => (
-          <option value={number}>{number}</option>
+          <option key={number} value={number}>
+            {number}
+          </option>
         ))}
       </Form.Control>
     </Form.Group>

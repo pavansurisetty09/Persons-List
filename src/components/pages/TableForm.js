@@ -18,14 +18,11 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
   const [sortCol, setSortCol] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pages, setPages] = useState(3);
   const [personsPerPage, setPersonsPerPage] = useState(3);
-  const [showSortButton, setShowSortButton] = useState(false);
   const pageNumbers = [];
   const [pageNumberLimit, setPageNumberLimit] = useState(3);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
-  const [customSet, setCustomSet] = useState(0);
 
   //Get Persons
 
@@ -75,7 +72,6 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
   const clickSortButton = (name) => {
     sortHandler(name);
     setSortCol(name);
-    setShowSortButton(true);
   };
 
   const sortList = (list) => {
@@ -93,7 +89,11 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
     }
     return list;
   };
+
+  //Search List
   let list = search === "" ? data : filter();
+
+  //Sort List
   list = sortList(list);
 
   //Pagination
@@ -124,9 +124,9 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
   };
 
   const prevPage = () => {
-    if (currentPage >= pageNumbers[0]) setCurrentPage((page) => page - 1);
-
-    if ((currentPage - 1) % pageNumberLimit == 0) {
+    // if (currentPage > pageNumbers[0]) setCurrentPage((page) => page - 1);
+    if (currentPage > 1) setCurrentPage((page) => page - 1);
+    if ((currentPage - 2) % pageNumberLimit == 0) {
       setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
@@ -137,8 +137,10 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
     setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
   };
   const btnDecrementClick = () => {
-    setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-    setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    if (currentPage > 5) {
+      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
   };
 
   let pageIncrementBtn = null;
@@ -150,10 +152,6 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
   if (minPageNumberLimit >= -1) {
     pageDecrementBtn = <Pagination.Ellipsis onClick={btnDecrementClick} />;
   }
-
-  const setCustom = (e) => {
-    setCustomSet(e.target.value);
-  };
 
   const renderPageNumbers = pageNumbers.map((number) => {
     if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
@@ -173,9 +171,8 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
       return null;
     }
   });
-
   return (
-    <Fragment className="table__selection">
+    <div className="table__selection">
       <Form.Group
         style={{ marginTop: "5%" }}
         as={Col}
@@ -299,23 +296,14 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
         ))}
       </Table>
       <PaginationForm
-        currentPage={currentPage}
-        currentPersons={currentPersons}
-        pageNumbers={pageNumbers}
-        paginate={paginate}
         nextPage={nextPage}
         prevPage={prevPage}
         renderPageNumbers={renderPageNumbers}
         pageIncrementBtn={pageIncrementBtn}
         pageDecrementBtn={pageDecrementBtn}
-        // handleLoadMore={handleLoadMore}
       />
-      <SetCustomItems
-        personsPerPage={personsPerPage}
-        setPersonsPerPage={setPersonsPerPage}
-        setCustom={setCustom}
-      />
-    </Fragment>
+      <SetCustomItems setPersonsPerPage={setPersonsPerPage} />
+    </div>
   );
 }
 
