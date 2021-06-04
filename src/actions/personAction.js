@@ -9,6 +9,7 @@ import {
   CLEAR_CURRENT,
   SHOW_MODAL,
   CLOSE_MODAL,
+  SET_PAGENUMBERS,
 } from "./types";
 
 // Add Persons to Server
@@ -103,3 +104,11 @@ export const closeModal = () => {
     type: CLOSE_MODAL,
   };
 };
+
+// // Set PageNumbers
+
+// export const setPageNumbers = () => {
+//   return {
+//     type: SET_PAGENUMBERS,
+//   };
+// };

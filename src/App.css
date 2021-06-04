@@ -1,12 +1,20 @@
-/* * {
-  max-width: 1160px;
-  margin: 0;
-  padding: 0;
-} */
+.bg {
+  height: 100%;
+  width: 100%;
+  background-color: #ffee00;
+  clip-path: polygon(100% 0, 100% 70%, 100% 78%, 0 100%, 0 0);
+  position: absolute;
+  z-index: -1;
+}
 
 .table__selection {
   max-width: 80%;
   margin: auto;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid rgba(128, 128, 128, 0.4) !important;
 }
 
 .center {

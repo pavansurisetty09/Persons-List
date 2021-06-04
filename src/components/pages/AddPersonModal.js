@@ -25,7 +25,7 @@ function AddPersonModal({ modalShow, showModal, closeModal, clearCurrent }) {
         <Button onClick={handleShow}>Add Person</Button>
       </div>
 
-      <Modal show={modalShow} onHide={() => closeModal()}>
+      <Modal className="modal-bg" show={modalShow} onHide={() => closeModal()}>
         <Modal.Header closeButton>Register a new Person</Modal.Header>
         <Modal.Body>
           <RegisterForm />

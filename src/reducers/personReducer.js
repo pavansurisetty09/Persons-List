@@ -8,6 +8,7 @@ import {
   CLEAR_CURRENT,
   SHOW_MODAL,
   CLOSE_MODAL,
+  SET_PAGENUMBERS,
 } from "../actions/types";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   current: null,
   currentPerson: {},
   show: false,
+  pageNumbers: [],
 };
 
 // eslint-disable-next-line
@@ -66,6 +68,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         show: false,
+      };
+    case SET_PAGENUMBERS:
+      return {
+        ...state,
+        pageNumbers: [],
       };
     default:
       return state;

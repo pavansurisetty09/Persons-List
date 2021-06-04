@@ -7,3 +7,4 @@ export const SET_CURRENT = "SET_CURRENT";
 export const CLEAR_CURRENT = "CLEAR_CURRENT";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const SET_PAGENUMBERS = "SET_PAGENUMBERS";

@@ -103,7 +103,6 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
   const currentPersons = list.slice(indexOfFirstPerson, indexOfLastPerson);
 
   for (let i = 1; i <= Math.ceil(data.length / personsPerPage); i++) {
-    console.log(data);
     pageNumbers.push(i);
   }
 
@@ -142,14 +141,12 @@ function TableForm({ showModal, getPersons, deletePerson, setCurrent, data }) {
     setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
   };
   const btnDecrementClick = () => {
-    if (currentPage > 2) {
-      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
-    }
+    setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+    setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
   };
 
   let pageIncrementBtn = null;
-  if (currentPage < pageNumbers.length - 2) {
+  if (maxPageNumberLimit < pageNumbers.length - 2) {
     pageIncrementBtn = <Pagination.Ellipsis onClick={btnIncrementClick} />;
   }
 

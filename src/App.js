@@ -9,7 +9,7 @@ import AddPersonModal from "./components/pages/AddPersonModal";
 
 function App() {
   return (
-    <div className="App">
+    <div className="bg">
       <Provider store={store}>
         <AddPersonModal />
         <TableForm />
